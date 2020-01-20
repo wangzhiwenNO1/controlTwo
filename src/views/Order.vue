@@ -43,11 +43,71 @@
             </ul>
           </div>
           <!-- 左边第二个 -->
-          <div class="leftItem leftTwo"></div>
+          <div class="leftItem leftTwo">
+            <div class="title">需求描述</div>
+            <ul class="demandBox">
+              <li>
+                <div>需求名称</div>
+                <div>Demo 003 检测项目</div>
+              </li>
+              <li>
+                <div>需求名称</div>
+                <div>Demo 003 检测项目</div>
+              </li>
+              <li>
+                <div>需求名称</div>
+                <div>Demo 003 检测项目</div>
+              </li>
+              <li>
+                <div>需求名称</div>
+                <div>Demo 003 检测项目</div>
+              </li>
+              <li>
+                <div>需求名称</div>
+                <div>
+                  <div>Demo 003 检测项目</div>
+                  <div>Demo 003 检测项目</div>
+                </div>
+                
+              </li>
+              <li>
+                <div>需求名称</div>
+                <div>Demo 003 检测项目</div>
+              </li>
+            </ul>
+          </div>
           <!-- 左边第三个 -->
-          <div class="leftItem leftThree"></div>
+          <div class="leftItem leftThree">
+            <div class="title">
+              <div>技术资料</div>
+              <el-button type="primary" size="mini" icon="el-icon-search">搜索</el-button>
+            </div>
+            <ul class="fileBox">
+              <li>
+                <div></div>
+                <div>文件名</div>
+              </li>
+              
+            </ul>
+          </div>
           <!-- 左边第四个 -->
-          <div class="leftItem leftFour"></div>
+          <div class="leftItem leftFour">
+            <div class="title">
+              <div>采购文件</div>
+              <el-button type="primary" size="mini" icon="el-icon-search">搜索</el-button>
+            </div>
+            <ul class="fileBox">
+              <li>
+                <div></div>
+                <div>文件名</div>
+              </li>
+              <li>
+                <div></div>
+                <div>文件名</div>
+              </li>
+              
+            </ul>
+          </div>
         </div>
       </el-col>
       <el-col :span="8">
@@ -72,6 +132,14 @@ export default {
 .order {
   padding: 1rem;
   box-sizing: border-box;
+
+  .title{
+    padding:0.3rem 0;
+    border-bottom:1px solid #F2F4FA;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   .leftBox {
     .leftItem {
@@ -111,6 +179,9 @@ export default {
         font-size: 0.75rem;
         align-items: center;
         justify-content: space-between;
+        border-top: 1px solid #F2F4FA;
+        margin-top: 1rem;
+
 
         li {
           padding: 0.25rem;
@@ -158,16 +229,70 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
-
-            
           }
-          
+
           .icon{
               width:1rem;
               height: 1rem;
               background: pink;
               display: block;
             }
+        }
+      }
+    }
+
+    .leftTwo{
+
+      .demandBox{
+        margin-top: 0.5rem;
+        li{
+          display: flex;
+          align-items: center;
+          
+
+          &>div:first-child{
+            flex:1;
+            border-right: 1px solid #F2F4FA;
+            height: 100%;
+            padding:0.2rem 0;
+            color:#999999;
+          }
+
+          &>div:last-child{
+            flex:3;
+            padding:0rem 1rem;
+            box-sizing: border-box;
+            color:#333333;
+          }
+        }
+      }
+    }
+
+    .leftThree,.leftFour{
+
+      .fileBox{
+        display: flex;
+        align-items: center;
+        padding:1rem 0;
+
+        li{
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+          
+
+          &>div:first-child{
+            width:3rem;
+            height: 3rem;
+            background: pink;
+            margin-bottom:0.3rem;
+          }
+
+          &>div:last-child{
+            color:#333333;
+            font-size: 0.75rem;
+          }
         }
       }
     }
