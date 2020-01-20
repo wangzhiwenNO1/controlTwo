@@ -9,7 +9,7 @@
           </div>
         </el-col>
         <el-col :span="8">
-          <div class="grid-content bg-purple-light">
+          <div class="grid-content bg-purple-light TopsearchBox">
             <div class="searchBox"></div>
           </div>
         </el-col>
@@ -86,6 +86,11 @@ export default {
   padding: 0 1rem;
   color: #fff;
   box-sizing: border-box;
+}
+.TopsearchBox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .searchBox {
   width: 20rem;
