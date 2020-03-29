@@ -2,15 +2,24 @@
 <template>
   <div class="Chat">
     <div class="chatTop">
-      <el-steps :active="active" finish-status="success" align-center>
-        <el-step title="创建"></el-step>
-        <el-step title="询价"></el-step>
-        <el-step title="执行"></el-step>
-        <el-step title="结束"></el-step>
-      </el-steps>
-      <div class="btnRow">
-        <div class="btn">录入变更</div>
+      <div class="chat_top_Box">
+        <div class="title">订单进度</div>
+        <ul class="progress">
+          <li>2019年8月10日 10:56 订单开始执行 </li>
+          <li>2019年8月10日 10:56 订单开始执行 </li>
+          <li>2019年8月10日 10:56 订单开始执行 </li>
+        </ul>
+        <!--      <el-steps :active="active" finish-status="success" align-center>-->
+        <!--        <el-step title="创建"></el-step>-->
+        <!--        <el-step title="询价"></el-step>-->
+        <!--        <el-step title="执行"></el-step>-->
+        <!--        <el-step title="结束"></el-step>-->
+        <!--      </el-steps>-->
+        <div class="btnRow">
+          <div class="btn">评价客户</div>
+        </div>
       </div>
+
       <div class="chatBox">
         <div class="title">
           <div>消息记录</div>
@@ -61,17 +70,29 @@ export default {
 </script>
 <style lang="less">
 .chatTop {
-  padding: 1rem;
-  background: #ffffff;
+
   border-radius: 0.3rem;
+
+  .progress{
+    line-height: 2rem;
+    color:#999999;
+  }
+  .chat_top_Box,.chatBox{
+    background: #ffffff;
+    padding: 1rem;
+  }
+  .chatBox{
+    margin-top:0.5rem;
+  }
+
 
   .el-step__title {
     font-size: 0.75rem;
     line-height: 20px;
   }
   .el-step__head.is-success {
-    color: #2c64ff;
-    border-color: #2c64ff;
+    color: #04AF00;
+    border-color: #04AF00;
   }
   .el-step__title.is-success {
     color: black;
@@ -81,16 +102,12 @@ export default {
 .btnRow {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
 
   .btn {
     width: 6.88rem;
     height: 1.88rem;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 105, 52, 1),
-      rgba(255, 52, 105, 1)
-    );
+    background:linear-gradient(90deg,rgba(4,175,0,1),rgba(52,225,34,1));
     border-radius: 1rem;
     color: #ffffff;
     text-align: center;
@@ -98,11 +115,7 @@ export default {
   }
 
   .sendBtn {
-    background: linear-gradient(
-      90deg,
-      rgba(44, 100, 255, 1),
-      rgba(52, 171, 255, 1)
-    );
+    background:linear-gradient(90deg,rgba(4,175,0,1),rgba(52,225,34,1));
     margin-right: 1rem;
   }
 }

@@ -2,7 +2,7 @@
   <div class="order">
     <el-row :gutter="20">
       <el-col :span="6">
-        <div class="grid-content bg-purple leftBox">
+        <div class="grid-content bg-purple leftBoxs">
           <!-- 左上 -->
           <div class="itemBox leftOne">
             <div class="orderNum">#45972</div>
@@ -17,7 +17,7 @@
               </li>
               <li>
                 <div>负责人</div>
-                <div>
+                <div class="conscientious">
                   <div class="avatar"></div>
                   <div>斩无极</div>
                 </div>
@@ -40,6 +40,24 @@
                   <div class="icon"></div>
                 </div>
               </li>
+            </ul>
+          </div>
+          <!--          -->
+          <div class="itemBox leftOther">
+            <div class="title">客户信息</div>
+            <ul class="ulOther">
+              <li>
+                <div>
+                  <el-avatar :size="30"></el-avatar>
+                  <div>上海少林检测技术...</div>
+                </div>
+                <div>
+                  <el-avatar :size="20"></el-avatar>
+                  <span>任盈盈</span>
+                </div>
+                <div class="infoBtn"> 详情</div>
+              </li>
+
             </ul>
           </div>
           <!-- 左边第二个 -->
@@ -79,7 +97,7 @@
           <div class="itemBox leftThree">
             <div class="title">
               <div>技术资料</div>
-              <el-button type="primary" size="mini" icon="el-icon-search">搜索</el-button>
+<!--              <el-button type="primary" size="mini" icon="el-icon-search">搜索</el-button>-->
             </div>
             <ul class="fileBox">
               <li>
@@ -92,7 +110,7 @@
           <div class="itemBox leftFour">
             <div class="title">
               <div>采购文件</div>
-              <el-button type="primary" size="mini" icon="el-icon-search">搜索</el-button>
+<!--              <el-button type="primary" size="mini" icon="el-icon-search">搜索</el-button>-->
             </div>
             <ul class="fileBox">
               <li>
@@ -110,8 +128,8 @@
       <el-col :span="9">
         <div class="grid-content bg-purple middleBox">
           <div class="itemBox middleOne">
-            <div class="title">服务方：上海少林检测技术服务有新公司</div>
-            <ul class="ulBox">
+            <div class="title">客户方：上海少林检测技术服务有新公司</div>
+            <ul class="middleUlBox">
               <li>
                 <div>服务方详情</div>
                 <div class="icon"></div>
@@ -152,9 +170,9 @@
           <div class="middleTwo itemBox">
             <div class="title">
               <div>报价信息</div>
-              <div>
-                <div>查看历史报价</div>
-                <i class="icon"></i>
+              <div class="seeBox">
+                <div class="">查看历史报价</div>
+                <i class="el-icon-arrow-down"></i>
               </div>
             </div>
             <div>
@@ -195,7 +213,8 @@
               >
                 <el-table-column prop="id" label="序号" width="50"></el-table-column>
                 <el-table-column prop="name" label="分包项目名称"></el-table-column>
-                <el-table-column prop="amount1" label="分包房方"></el-table-column>
+                <el-table-column prop="amount1" label="分包方"></el-table-column>
+                <el-table-column prop="amount3" label="金额"></el-table-column>
               </el-table>
             </div>
           </div>
@@ -326,11 +345,7 @@ export default {
   }
 
   .upOffer {
-    background: linear-gradient(
-      90deg,
-      rgba(44, 100, 255, 1),
-      rgba(52, 171, 255, 1)
-    );
+    background:linear-gradient(90deg,rgba(4,175,0,1),rgba(52,225,34,1));
     margin-top: 0.5rem;
   }
 
@@ -383,7 +398,7 @@ export default {
       }
 
       & > div:last-child {
-        color: #333333;
+        color: #999999;
         font-size: 0.75rem;
       }
     }
@@ -397,7 +412,7 @@ export default {
     align-items: center;
   }
 
-  .ulBox {
+  .ulBox,.middleUlBox {
     display: flex;
     color: #999999;
     font-size: 0.75rem;
@@ -417,9 +432,19 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size:0.75rem;
       }
       & > div:first-child {
         margin-bottom: 0.5rem;
+      }
+
+      .conscientious{
+        font-size:0.75rem;
+        flex-direction: column;
+        & > div {
+
+          font-size:0.75rem;
+        }
       }
 
       &:last-child {
@@ -427,7 +452,7 @@ export default {
       }
 
       .state {
-        width: 5rem;
+        width: 4rem;
         height: 1.25rem;
         background: linear-gradient(
           90deg,
@@ -475,7 +500,7 @@ export default {
     }
   }
 
-  .leftBox {
+  .leftBoxs {
     .leftOne {
       .orderNum {
         font-size: 0.75rem;
@@ -522,6 +547,26 @@ export default {
       }
     }
 
+    .leftOther{
+
+      .ulOther{
+        li{
+          display: flex;
+          justify-content: space-between;
+
+          &>div{
+            display: flex;
+            align-items: center;
+          }
+        }
+
+      }
+
+      .infoBtn{
+        color: #04AF00;
+      }
+    }
+
     .leftThree,
     .leftFour {
     }
@@ -531,10 +576,23 @@ export default {
 .middleBox {
   .middleOne {
     background: #ffffff;
+
+
+
   }
 
   .fileBox {
     padding: 0;
   }
 }
+
+  .seeBox{
+    display: flex;
+    align-items: center;
+    color: #04AF00;
+
+    .el-icon-arrow-down{
+
+    }
+  }
 </style>
