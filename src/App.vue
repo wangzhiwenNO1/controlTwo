@@ -16,7 +16,7 @@
         <el-col :span="8">
           <div class="grid-content bg-purple topRight">
             <div class="alarm">
-              <i class="icon "></i>
+              <i class="icon"></i>
               <span>(5)</span>
             </div>
             <div class="avatar"></div>
@@ -29,11 +29,11 @@
             <div class="icon gzt"></div>
             <div>工作台</div>
           </div>
-          <div class="tabItem " :class="type==2?'active':''" @click="jump(2)">
+          <div class="tabItem" :class="type==2?'active':''" @click="jump(2)">
             <div class="icon ddgl"></div>
             <div>订单管理</div>
           </div>
-          <div class="tabItem " :class="type==3?'active':''" @click="jump(3)">
+          <div class="tabItem" :class="type==3?'active':''" @click="jump(3)">
             <div class="icon sbgl"></div>
             <div>设备管理</div>
           </div>
@@ -57,7 +57,7 @@
 
         <!-- right -->
         <div class="tabRight">
-          <div >团队成员</div>
+          <div>团队成员</div>
           <div>
             <img src="#" alt />
           </div>
@@ -76,7 +76,6 @@
         <div>Copyright©2019实验室帮 | 沪ICP备1700294号-3</div>
       </div>
       <div>
-
         <el-breadcrumb separator="|">
           <el-breadcrumb-item>服务协议</el-breadcrumb-item>
           <el-breadcrumb-item>隐私协议</el-breadcrumb-item>
@@ -88,69 +87,65 @@
 </template>
 
 <script>
-
-
 export default {
-  name: 'app',
-    components:{
-
-    },
-  data(){
+  name: "app",
+  components: {},
+  data() {
     return {
-      type:1
-    }
+      type: 1
+    };
   },
-  methods:{
-    jump(type){
-      this.type=type;
-      let url="";
+  methods: {
+    jump(type) {
+      this.type = type;
+      let url = "";
       switch (type) {
         case 1:
-          url="/workbench";
-              break;
+          url = "/workbench";
+          break;
         case 2:
-          url="/order";
+          url = "/ordering";
           break;
         case 3:
-          url="/equipment";
+          url = "/ability";
           break;
         case 4:
-          url="/partners";
+          url = "/partners";
           break;
         case 5:
-          url="/customer";
+          url = "/customer";
           break;
         case 6:
-          url="/laboratory";
+          url = "/laboratory";
           break;
         case 7:
-          url="/setup/market";
+          url = "/setup/market";
           break;
         default:
           break;
       }
 
       this.$router.push({
-        path: url,
-      })
+        path: url
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="less">
-@import  './assets/css/reset.css';
+@import "./assets/css/reset.css";
 
 .TopBox {
   height: 3.44rem;
-  background: #04AF00;
+  background: #04af00;
   display: flex;
   align-items: center;
   padding: 0 1rem;
   color: #fff;
   box-sizing: border-box;
 }
-.TopsearchBox{
+.TopsearchBox {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -158,7 +153,7 @@ export default {
 .searchBox {
   width: 20rem;
   height: 2rem;
-  background:rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
 }
 .topRight {
@@ -166,12 +161,12 @@ export default {
   justify-content: flex-end;
   align-items: center;
 
-  .alarm{
+  .alarm {
     display: flex;
     align-items: center;
-    i{
+    i {
       display: inline-block;
-      width:1rem;
+      width: 1rem;
       height: 1rem;
       background: url("./assets/imgs/btn-gbtz1.png");
       background-size: contain;
@@ -206,75 +201,73 @@ export default {
       height: 2.5rem;
       // border-bottom: 1px solid #04AF00;
       line-height: 2.5rem;
-      margin-right:1rem;
+      margin-right: 1rem;
       div {
         font-size: 1rem;
       }
 
-      .gzt{
+      .gzt {
         background: url("./assets/imgs/btn-gzt1.png") no-repeat;
         background-size: cover;
       }
-      .ddgl{
+      .ddgl {
         background: url("./assets/imgs/btn-guanli1.png") no-repeat;
         background-size: contain;
       }
-      .sbgl{
+      .sbgl {
         background: url("./assets/imgs/btn-shebei1.png") no-repeat;
         background-size: contain;
       }
-      .hzf{
+      .hzf {
         background: url("./assets/imgs/btn-hzfgl1.png") no-repeat;
         background-size: contain;
       }
-      .kh{
+      .kh {
         background: url("./assets/imgs/btn-gys1.png") no-repeat;
         background-size: contain;
       }
 
-      .zxsc{
+      .zxsc {
         background: url("./assets/imgs/btn-shichang1.png") no-repeat;
         background-size: contain;
       }
-      .sz{
+      .sz {
         background: url("./assets/imgs/btn-shezhi1.png") no-repeat;
         background-size: contain;
       }
 
-
       &.active {
-        border-bottom: 1px solid #04AF00;
+        border-bottom: 1px solid #04af00;
 
-        .gzt{
+        .gzt {
           background: url("./assets/imgs/btn-gzt2.png") no-repeat;
           background-size: cover;
         }
-        .ddgl{
+        .ddgl {
           background: url("./assets/imgs/btn-guanli2.png") no-repeat;
           background-size: contain;
         }
-        .sbgl{
+        .sbgl {
           background: url("./assets/imgs/btn-shebei2.png") no-repeat;
           background-size: contain;
         }
-        .hzf{
+        .hzf {
           background: url("./assets/imgs/btn-hzfgl2.png") no-repeat;
           background-size: contain;
         }
-        .kh{
+        .kh {
           background: url("./assets/imgs/btn-gys2.png") no-repeat;
           background-size: contain;
         }
 
-        .zxsc{
+        .zxsc {
           background: url("./assets/imgs/btn-shichang2.png") no-repeat;
           background-size: contain;
         }
-        .sz{
+        .sz {
           background: url("./assets/imgs/btn-shezhi2.png") no-repeat;
           background-size: contain;
         }
-
       }
     }
     .icon {
@@ -284,17 +277,17 @@ export default {
   .tabRight {
     display: flex;
     align-items: center;
-    font-size:0.75rem;
-    color:#999999;
+    font-size: 0.75rem;
+    color: #999999;
 
-    img{
+    img {
       display: block;
-      width:1.25rem;
+      width: 1.25rem;
       height: 1.25rem;
       border-radius: 50%;
     }
-    div{
-      margin-left:0.3rem;
+    div {
+      margin-left: 0.3rem;
     }
   }
 
@@ -306,56 +299,56 @@ export default {
   }
 }
 
-.viewBox{
+.viewBox {
   min-height: calc(100vh - 9.6rem);
-  background: #F2F4FA;
+  background: #f2f4fa;
 }
 
-.footer{
+.footer {
   height: 3.65rem;
-  background: #E0E4EF;
-  display:flex;
+  background: #e0e4ef;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:0 1rem;
-  box-sizing:border-box;
+  padding: 0 1rem;
+  box-sizing: border-box;
   color: #999999;
-  font-size:0.75rem;
+  font-size: 0.75rem;
 
-  .footerLeft{
+  .footerLeft {
     display: flex;
     align-items: center;
   }
 
-  .logoBox{
-    width:7.06rem;
-    height:1.75rem;
-    background: #EEEEEE;
+  .logoBox {
+    width: 7.06rem;
+    height: 1.75rem;
+    background: #eeeeee;
     margin-right: 0.5rem;
   }
 
-  div{
-    font-size:0.75rem;
+  div {
+    font-size: 0.75rem;
   }
-  .el-breadcrumb{
-    font-size:0.75rem;
+  .el-breadcrumb {
+    font-size: 0.75rem;
   }
 }
-.green{
-  color:#04AF00;
+.green {
+  color: #04af00;
 }
-.greenBtn{
-  background: #04AF00;
-  color:#FFFFFF;
+.greenBtn {
+  background: #04af00;
+  color: #ffffff;
 }
-  .greenDiv{
-    width:6.88rem;
-    height:1.88rem;
-    background:linear-gradient(90deg,rgba(4,175,0,1),rgba(52,225,34,1));
-    border-radius:1rem;
-    text-align: center;
-    line-height: 1.88rem;
-    color:#FFFFFF;
-    cursor: default;
-  }
+.greenDiv {
+  width: 6.88rem;
+  height: 1.88rem;
+  background: linear-gradient(90deg, rgba(4, 175, 0, 1), rgba(52, 225, 34, 1));
+  border-radius: 1rem;
+  text-align: center;
+  line-height: 1.88rem;
+  color: #ffffff;
+  cursor: default;
+}
 </style>

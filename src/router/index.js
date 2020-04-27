@@ -90,6 +90,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../views/Partners')
     },
     {
+        path: '/ability',/*设备管理*/
+        name: 'ability',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Ability')
+    },
+    {
         path: '/equipment',/*设备管理*/
         name: 'equipment',
         component: () => import(/* webpackChunkName: "about" */ '../views/Equipment')

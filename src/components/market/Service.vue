@@ -1,8 +1,14 @@
 <template>
   <div class="serviceBox">
     <div class="showBtn">
-      <div class="active"><i class="icon close-eyes"></i><span>不公开显示点评</span></div>
-      <div><i class="icon open-eyes"></i><span>公开显示点评</span></div>
+      <div class="active">
+        <i class="icon close-eyes"></i>
+        <span>不公开显示点评</span>
+      </div>
+      <div>
+        <i class="icon open-eyes"></i>
+        <span>公开显示点评</span>
+      </div>
     </div>
     <ul class="serviceUl">
       <li>
@@ -29,7 +35,23 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "service",
+  data() {
+    return {
+      currentPage3: 1
+    };
+  },
+  mounted() {},
+  methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前 ${val} 页`);
+    }
+  }
+};
 </script>
 <style lang="less" scoped>
 .serviceBox {
@@ -40,41 +62,41 @@ export default {};
   flex-direction: column;
   align-items: center;
 
-  .showBtn{
+  .showBtn {
     width: 100%;
     display: flex;
     align-self: center;
-    padding:0.5rem 1rem 0;
+    padding: 0.5rem 1rem 0;
     box-sizing: border-box;
-    &>div{
+    & > div {
       display: flex;
       align-items: center;
       margin-right: 1rem;
     }
 
-    i{
+    i {
       display: inline-block;
       width: 1rem;
       height: 0.5rem;
       background: pink;
       margin-right: 0.3rem;
     }
-    .close-eyes{
+    .close-eyes {
       background: url("../../assets/imgs/btn-gkdp1.png") no-repeat;
       background-size: contain;
     }
-    .open-eyes{
+    .open-eyes {
       background: url("../../assets/imgs/btn-bgkdp1.png") no-repeat;
       background-size: contain;
     }
 
-    .active{
-      color:#04AF00;
-      .close-eyes{
+    .active {
+      color: #04af00;
+      .close-eyes {
         background: url("../../assets/imgs/btn-gkdp2.png") no-repeat;
         background-size: contain;
       }
-      .open-eyes{
+      .open-eyes {
         background: url("../../assets/imgs/btn-bgkdp2.png") no-repeat;
         background-size: contain;
       }
@@ -115,17 +137,21 @@ export default {};
       color: rgba(153, 153, 153, 1);
     }
 
-    .btnDiv{
-      width:5.63rem;
-      height:1.88rem;
-      background:linear-gradient(90deg,rgba(4,175,0,1),rgba(52,225,34,1));
-      border-radius:1rem;
+    .btnDiv {
+      width: 5.63rem;
+      height: 1.88rem;
+      background: linear-gradient(
+        90deg,
+        rgba(4, 175, 0, 1),
+        rgba(52, 225, 34, 1)
+      );
+      border-radius: 1rem;
       position: absolute;
       text-align: center;
       line-height: 1.88rem;
       right: 1rem;
-      top:1rem;
-      color:#FFFFFF;
+      top: 1rem;
+      color: #ffffff;
     }
   }
 }

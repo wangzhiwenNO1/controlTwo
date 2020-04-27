@@ -40,16 +40,18 @@
     </el-col>
     <el-col :span="11" class="cardBox">
       <el-card class="box-card" v-if="true" shadow="hover">
-        <div class="cardItem">
+        <div class="cardItem" v-for="(item,index) in partners" :key="index">
           <div class="imgBox">
-            <el-avatar :size="70" src="#"></el-avatar>
-            <el-button round size="mini">取消链接</el-button>
+            <el-avatar :size="70" :src="item.labLogo"></el-avatar>
+            <el-button round size="mini" v-if="item.status==0">申请中</el-button>
+            <el-button round size="mini" v-else-if="item.status==1">连接成功</el-button>
+            <el-button round size="mini" v-else-if="item.status==2">连接拒绝</el-button>
           </div>
           <div class="infoBox">
             <div>
               <div>
-                <div class="name">上海少林检测技术服务有限公司</div>
-                <div class="site">上海市黄浦区示例路888号</div>
+                <div class="name">{{item.labName}}</div>
+                <div class="site">{{item.address}}</div>
               </div>
               <div>
                 <el-button round>选择</el-button>
@@ -58,15 +60,15 @@
             <div class="numBox">
               <div>
                 <i class="el-icon-document"></i>
-                <div>总订单数量：100</div>
+                <div>总订单数量：{{item.orderCount}}</div>
               </div>
               <div>
                 <i class="el-icon-thumb"></i>
-                <div>认可指数：100</div>
+                <div>认可指数：{{item.rate}}</div>
               </div>
               <div>
                 <i class="el-icon-thumb"></i>
-                <div>服务评价：100</div>
+                <div>服务评价：{{item.score}}</div>
               </div>
             </div>
           </div>
@@ -80,7 +82,7 @@
             <el-input placeholder="请输入内容"></el-input>
           </div>
           <div class="buttonBox">
-              <el-button round size="mini">发送邀请</el-button>
+            <el-button round size="mini">发送邀请</el-button>
           </div>
         </div>
       </el-card>
@@ -127,10 +129,29 @@
 export default {
   data() {
     return {
-      checkList: ["选中且禁用", "复选框 A"]
+      checkList: ["选中且禁用", "复选框 A"],
+      partners: []
     };
   },
+  mounted() {
+    this.getpartners();
+  },
   methods: {
+    getpartners() {
+      let _this = this;
+      let url = "/lab2lab/v1/provider/getpartners";
+      let data = {
+        access_token: this.$store.state.userInfo.access_token,
+        linked: 0,
+        labType: 1
+      };
+      this.Axios.get(url, data).then(res => {
+        console.log(res);
+        if (res.code == 200) {
+          _this.partners = res.data;
+        }
+      });
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -160,10 +181,10 @@ export default {
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
-    jump(){
+    jump() {
       this.$router.push({
-        path: "/demand",
-      })
+        path: "/demand"
+      });
     }
   }
 };
@@ -180,8 +201,8 @@ serviceBoxs {
   display: flex;
   flex-direction: column;
 }
-.el-checkbox__label{
-  font-size:0.75rem;
+.el-checkbox__label {
+  font-size: 0.75rem;
 }
 .radioBox {
   background: #ffffff;
@@ -335,26 +356,25 @@ serviceBoxs {
   }
 }
 
-.cardItems{
-
-.site{
+.cardItems {
+  .site {
     margin-bottom: 1rem;
-    border-bottom: 1px solid #F4F2FF;
+    border-bottom: 1px solid #f4f2ff;
     padding-bottom: 1rem;
-}
-.inputBox{
+  }
+  .inputBox {
     display: flex;
     align-items: center;
 
-    label{
-        flex-shrink: 0;
+    label {
+      flex-shrink: 0;
     }
-}
-.buttonBox{
-    margin-top:2rem;
-    padding-top:1rem;
-    border-top:1px solid #f4f2ff;
+  }
+  .buttonBox {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f4f2ff;
     text-align: right;
-}
+  }
 }
 </style>
