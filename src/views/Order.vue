@@ -359,7 +359,7 @@
         },
 
 
-        colors:["#2C64FF","#2C64FF","#2C64FF"],
+        colors:["rgba(131, 230, 34, 1)","rgba(131, 230, 34, 1)","rgba(131, 230, 34, 1)"],
         centerDialogVisible: true,
         dialogFormVisible:false,
 
@@ -740,7 +740,7 @@
 
     .title {
       & > div:last-child {
-        color: #2C64FF;
+        color: rgba(131, 230, 34, 1);
         display: flex;
         align-items: center;
 
@@ -749,7 +749,7 @@
         }
 
         i {
-          color: #2C64FF;
+          color: rgba(131, 230, 34, 1);
         }
       }
     }
