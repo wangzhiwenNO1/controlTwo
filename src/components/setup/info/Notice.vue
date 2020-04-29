@@ -4,24 +4,24 @@
 
         <el-form-item label="选择通知方式：" class="">
             <div class="checkbox">
-                <el-checkbox >邮件通知</el-checkbox>
+                <el-checkbox  v-model="isEmail">邮件通知</el-checkbox>
                 <el-checkbox>短信通知</el-checkbox>
             </div>
 
         </el-form-item>
-        <div>
+        <div class="elCheckbox">
             <el-checkbox-group v-model="checkList" class="checkbox">
-                <el-checkbox label="订单状态更新时通知我"></el-checkbox>
-                <el-checkbox label="有新消息时通知我"></el-checkbox>
-                <el-checkbox label="有内部公告时通知我"></el-checkbox>
-                <el-checkbox label="关闭邮件通知功能" ></el-checkbox>
+                <el-checkbox :disabled="!isEmail" @change="(e)=>handleCheckedCitiesChange(e,'orderStatusChanged')" label="订单状态更新时通知我" ></el-checkbox>
+                <el-checkbox :disabled="!isEmail" @change="(e)=>handleCheckedCitiesChange(e,'newMessageArrived')" label="有新消息时通知我" ></el-checkbox>
+                <el-checkbox :disabled="!isEmail" @change="(e)=>handleCheckedCitiesChange(e,'internalNotification')" label="有内部公告时通知我" ></el-checkbox>
+                <el-checkbox @change="(e)=>handleCheckedCitiesChange(e,'emailNotificationStatus')"  label="关闭邮件通知功能" ></el-checkbox>
             </el-checkbox-group>
         </div>
 
 
-        <div class="btnBox">
-            <el-button size="mini" class="greenBtn" round  @click="submitForm('ruleForm')">立即创建</el-button>
-            <el-button size="mini" round @click="resetForm('ruleForm')">取消</el-button>
+        <div>
+            <el-button size="mini" round type="primary" @click="submitForm('ruleForm')" class="greenBtn">更新</el-button>
+            <el-button size="mini" round @click="resetForm('ruleForm')" class="cancelBtn">取消</el-button>
         </div>
     </el-form>
 </template>
@@ -29,7 +29,17 @@
     export default {
         data() {
             return {
-                checkList: ['选中且禁用','复选框 A'],
+                isEmail:true,
+                formData:{
+                    emailNotificationStatus:0,
+                    orderStatusChanged:0,
+                    newMessageArrived:0,
+                    internalNotification:0,
+                },
+
+
+                checkList: ["邮件通知"],
+
                 ruleForm: {
                     name: '',
                     region: '',
@@ -66,16 +76,56 @@
                 }
             };
         },
+        mounted() {
+            this.geteconfig();
+        },
         methods: {
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
+
+            handleCheckedCitiesChange(e,name){
+                console.log(e,this.formData[name]);
+
+                if(e){
+                    this.formData[name]=1;
+                }else{
+                    this.formData[name]=0;
+                }
+            },
+            //查询Email通知配置
+            geteconfig(){
+
+                let that = this;
+
+                this.Axios.post("/lab2lab/v1/provider/seteconfig", {}).then(function (res) {
+                    console.log("查询Email通知配置",res);
+                    if(res.data){
+                        that.formData=res.data;
                     }
-                });
+                })
+            },
+            //更新email
+            submitForm() {
+                let data=this.formData;
+                let that = this;
+
+                if(this.isEmail){
+                    data.emailNotificationStatus=1;
+                }else{
+                    data.emailNotificationStatus=0;
+                }
+                console.log(data);
+
+
+                this.Axios.post("/lab2lab/v1/provider/seteconfig", data).then(function (res) {
+                    console.log("更新email",res);
+                })
+                // this.$refs[formName].validate((valid) => {
+                //     if (valid) {
+                //         alert('submit!');
+                //     } else {
+                //         console.log('error submit!!');
+                //         return false;
+                //     }
+                // });
             },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
@@ -126,7 +176,7 @@
             flex-direction: column;
         }
 
-        serviceBoxs{
+        .el-checkbox-group{
             margin-bottom:0.5rem;
         }
 
@@ -135,6 +185,10 @@
             border-bottom:1px solid #eee;
             margin-bottom:0.5rem;
         }
+    }
+
+    .elCheckbox{
+        margin-bottom: 2rem;
     }
 
 </style>

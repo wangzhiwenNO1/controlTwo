@@ -290,7 +290,7 @@ export default {
   display: flex;
 
   .leftBox {
-    min-height: calc(100vh - 12rem);
+    min-height: calc(100vh - 20rem);
     background: rgba(255, 255, 255, 1);
     padding: 0.5rem 0 0.5rem 0.5rem;
     -webkit-box-sizing: border-box;
