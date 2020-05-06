@@ -26,11 +26,11 @@
           <div class="icon"></div>
         </div>
         <ul class="chatHistory">
-          <li>
+          <li v-for="(item,index) in chatList">
             <div class="time">2019年9月16日 15:37</div>
             <div class="chatItem">
               <div class="avatar"></div>
-              <div class="chatText">王经理，贵司的付款已收到，谢谢！</div>
+              <div class="chatText">{{item.message}}</div>
             </div>
           </li>
           <li>
@@ -41,7 +41,10 @@
             </div>
           </li>
         </ul>
-        <div class="subTitle">发送消息</div>
+        <div class="subTitle">
+          <div>发送消息</div>
+          <i class="iconEnclosure"></i>
+        </div>
         <div>
           <el-input type="textarea" v-model="desc" placeholder="请输入您要发送的消息"></el-input>
         </div>
@@ -49,6 +52,7 @@
           <div class="btn sendBtn">发送</div>
           <div class="btn">放弃</div>
         </div>
+
       </div>
     </div>
   </div>
@@ -63,8 +67,93 @@ export default {
   data() {
     return {
       active: 4,
-      desc:""
+      desc: "",
+      orderId: "001",
+      rejectReason:"",//拒绝原因
+      chatList:[],
     };
+  },
+  created() {
+    this.getmessagehistory()
+  },
+  methods: {
+    //消息记录
+    getmessagehistory(){
+      let that=this;
+      that.Axios.get("/lab2lab/v1/provider/getmessagehistory", {
+        id: that.orderId,
+        orderNum:"7678687"
+      }).then(function (res) {
+        console.log("消息记录",res);
+        if (res.code == 200) {
+          that.chatList=res.data;
+
+        }
+      })
+    },
+    // 需求方确认订单完成
+    acceptorderfinish(){
+      let that=this;
+      that.Axios.get("/lab2lab/v1/requestor/acceptorderfinish", {
+        id: that.orderId,
+      }).then(function (res) {
+
+        if (res.code == 200) {
+          that.$message({
+            type: 'success',
+            message: '订单完成'
+          });
+
+        }
+      })
+    },
+    //  需求方拒绝订单完成
+    rejectorderfinish(){
+      let that = this;
+      this.$prompt('拒绝原因', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({value}) => {
+
+        that.Axios.get("/lab2lab/v1/requestor/rejectorderfinish", {
+          id: that.orderId,
+          rejectReason: value,
+        }).then(function (res) {
+
+          if (res.code == 200) {
+            that.$message({
+              type: 'success',
+              message: '取消成功'
+            });
+
+          }
+        })
+      })
+    },
+    //  取消订单
+    cancelorder() {
+
+      let that = this;
+      this.$prompt('请输入取消原因', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({value}) => {
+
+        that.Axios.get("/lab2lab/v1/requestor/cancelorder", {
+          id: that.orderId,
+          reason: value,//订单编号
+        }).then(function (res) {
+
+          if (res.code == 200) {
+            that.$message({
+              type: 'success',
+              message: '取消成功'
+            });
+
+          }
+        })
+      })
+    },
   }
 };
 </script>

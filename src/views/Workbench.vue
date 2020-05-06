@@ -123,7 +123,7 @@
             <i class="icon"></i>
           </div>
         </div>
-        <div class="echartBox"></div>
+        <div class="echartBox" id="echartBox"></div>
       </div>
     </div>
   </div>
@@ -131,12 +131,16 @@
 
 <script>
 // @ is an alias to /src
+import {mapState} from "vuex";
+import echarts from 'echarts';
 
 export default {
   name: "workbench",
   components: {},
   data() {
     return {
+      charts: '',
+
       count: 0,
       options: [
         {
@@ -209,6 +213,93 @@ export default {
           console.log(_this.getNumbers);
         }
       });
+    },
+    //echart表格
+    drawPie(id) {
+      let that=this;
+      this.charts = echarts.init(document.getElementById(id))
+      this.charts.setOption({
+        xAxis: {
+          type: 'category',
+          data: that.paymentDateList
+        },
+        yAxis: {
+          type: 'value'
+        },
+
+        series: [
+          {
+            type: 'line',
+
+            labelLine: {
+
+            },
+            data: that.paymentList
+          }
+        ]
+      })
+    },
+
+    //切换分析类型
+    changeAnalyze(type){
+      if(type==1){
+        this.getpaycount();
+        this.analyze=true;
+      }else{
+        this.getordercount();
+        this.analyze=false;
+      }
+    },
+    //需求方支出统计接口
+    getpaycount(){
+      //  获取需求方数字统计
+      let that = this;
+      this.Axios.get("/lab2lab/v1/requestor/getpaycount", {
+        startDate:"2020-01-01",
+        endDate:"2020-02-01",
+      }).then(function (res) {
+        console.log("获取需求方数字统计",res);
+        if (res.code == 200) {
+          if(res.data.length>0){
+            let paymentList=[],paymentDateList=[];
+            res.data.forEach((item)=>{
+              paymentList.push(item.payment);
+              paymentDateList.push(item.paymentDate);
+            })
+            that.paymentDateList=paymentDateList;
+            that.paymentList=paymentList;
+
+            that.$nextTick(function () {
+              that.drawPie('echartBox')
+            })
+          }
+        }
+      })
+    },
+    //需求方订单统计接口
+    getordercount(){
+      let that = this;
+      this.Axios.get("/lab2lab/v1/requestor/getordercount", {
+        startDate:"2020-01-01",
+        endDate:"2020-02-01",
+      }).then(function (res) {
+        console.log("需求方订单统计接口",res);
+        if (res.code == 200) {
+          if(res.data.length>0){
+            let paymentList=[],paymentDateList=[];
+            res.data.forEach((item)=>{
+              paymentList.push(item.orderNumber);
+              paymentDateList.push(item.orderDate);
+            })
+            that.paymentDateList=paymentDateList;
+            that.paymentList=paymentList;
+
+            that.$nextTick(function () {
+              that.drawPie('echartBox')
+            })
+          }
+        }
+      })
     },
     load() {
       this.count += 2;

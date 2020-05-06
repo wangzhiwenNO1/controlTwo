@@ -36,7 +36,6 @@
                     <div class="avatar">
 
                     </div>
-
                   </div>
                   <div v-if="orderInfo.memberList">{{orderInfo.memberList.length}}+</div>
                   <div class="icon addIcon"></div>
