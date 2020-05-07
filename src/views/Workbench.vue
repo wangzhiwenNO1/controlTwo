@@ -87,10 +87,10 @@
       <div class="rightBox itemBox">
         <div class="title">统计分析</div>
         <div class="tabBoxs">
-          <div>
+          <div :class="[analyze==1?'active':'']" @click="changeAnalyze(1)">
             <i class="icon icon-expenditure"></i>支出统计
           </div>
-          <div>
+          <div :class="[analyze==2?'active':'']" @click="changeAnalyze(2)">
             <i class="icon icon-order"></i>订单统计
           </div>
         </div>
@@ -140,6 +140,7 @@ export default {
   data() {
     return {
       charts: '',
+      analyze:1,
 
       count: 0,
       options: [
@@ -200,6 +201,7 @@ export default {
   },
   mounted() {
     this.initGetData();
+    this.getpaycount();
   },
   methods: {
     initGetData() {
