@@ -112,11 +112,14 @@ export default {
           break;
         case 2:
           url = "/register";
+          this.$router.push({
+            path: url
+          });
           break;
-
         default:
           break;
       }
+
     }
   }
 };

@@ -7,7 +7,7 @@ import './plugins/element.js'
 import qs from 'qs'
 
 axios.defaults.timeout = 100000;              //超时默认值
-axios.defaults.baseURL = "http://lab2lab.smart-monitor.cn/mock/15/";    //默认baseUrl
+axios.defaults.baseURL = "http://47.102.149.114:8080/";    //默认baseUrl
 axios.defaults.responseType = 'json';       //默认数据相应类型
 // http response 拦截器
 // ajax请求回调之前拦截 对请求返回的信息做统一处理 比如error为401无权限则跳转到登陆界面

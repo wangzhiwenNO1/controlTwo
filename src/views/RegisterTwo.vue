@@ -1,38 +1,36 @@
 <template>
-    <div class="registerBox">
-        <div class="logoBox">
-            <img src="../assets/imgs/icon-LOGO2.png" alt="">
-        </div>
-        <div class="registerTwoBox">
+    <div class="registerTwoBox">
+        <div class="logoBox"><img src="../assets/imgs/icon-LOGO2.png" alt=""></div>
+        <div class="mainTwoBox">
             <div class="title">注册</div>
             <div>
                 <div class="label">姓名</div>
                 <div>
-                    <el-input placeholder="请输入真实姓名"></el-input>
+                    <el-input v-model="formData.userName" placeholder="请输入真实姓名"></el-input>
                 </div>
             </div>
             <div>
                 <div class="label">邮箱地址</div>
                 <div>
-                    <el-input placeholder="email@example.com"></el-input>
+                    <el-input v-model="formData.email" placeholder="email@example.com"></el-input>
                 </div>
             </div>
             <div>
                 <div class="label">联系电话</div>
                 <div>
-                    <el-input placeholder="请输入11位手机号"></el-input>
+                    <el-input v-model="formData.phone" placeholder="请输入11位手机号"></el-input>
                 </div>
             </div>
             <div>
                 <div class="label">密码</div>
                 <div>
-                    <el-input placeholder="8-16位字母、数字和符号两种以上的组合"></el-input>
+                    <el-input v-model="formData.password" placeholder="8-16位字母、数字和符号两种以上的组合"></el-input>
                 </div>
             </div>
             <div>
                 <div class="label">确认密码</div>
                 <div>
-                    <el-input placeholder="请再次输入新设置的密码"></el-input>
+                    <el-input v-model="formData.confirmPassword" placeholder="请再次输入新设置的密码"></el-input>
                 </div>
             </div>
             <div class="btnRows">
@@ -43,42 +41,67 @@
         <div class="goBack">返回首页 <i class="el-icon-arrow-right"></i></div>
     </div>
 </template>
-
 <script>
+    // const { ChineseDistricts, province, city, area, town } = require('province-city-china/data');
+    import ChineseDistricts from "province-city-china/data"
     export default {
         data() {
             return {
-                options: [{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
-                }],
-                value: ''
+                ChineseDistricts:ChineseDistricts,
+                province:[],
+                shi1: [],
+                qu1: [],
+                city:[],
+                block:[],
+                pname:'',//省的名字
+                cname:'',//市的名字
+                bname:'' , //区的名字
+                value: '',
+                formData:{
+                    userName:"",
+                    email:"",
+                    phone:"",
+                    password:"",
+                    confirmPassword:""
+                }
             }
         },
         methods:{
-            jump(){
-                this.$router.push({
-                    path: "/registerThree",
+            // 加载china地点数据，三级
+            getCityData:function(){
+                let that = this;
+                that.ChineseDistricts.forEach(function(item,index){
+                    //省级数据
+                    that.province.push({id: item.code, value: item.name, children: item.cityList})
                 })
-            }
+            },
+
+            jump(){
+                let registerData=this.$store.state.registerInfo;
+
+
+                Object.keys(registerData).forEach(item=>{
+                    that.formData[item]=registerData[item];
+                })
+                this.$store.commit('register', this.formData);
+                this.$router.push({
+                    path: "/registerThree"
+                });
+            },
+
+        },
+
+        created:function(){
+            // this.getCityData();
+            console.log(this.ChineseDistricts);
+            this.province=this.ChineseDistricts.province;
         }
     }
 </script>
 
+
 <style lang="less" scoped>
-    .registerBox {
+    .registerTwoBox {
         background: #F2F4FA;
         width: 100%;
         height: 100vh;
@@ -89,13 +112,11 @@
         align-items: center;
 
         .logoBox {
-
             height: 3.38rem;
-
             margin: 2rem;
         }
 
-        .registerTwoBox {
+        .mainTwoBox {
             width: 31.25rem;
             background: rgba(255, 255, 255, 1);
             border-radius: 0.3rem;
@@ -125,7 +146,7 @@
             justify-content: space-between;
         }
         .el-button{
-            width:50%;
+            width:40%;
             margin-top:0.5rem;
         }
         .next{

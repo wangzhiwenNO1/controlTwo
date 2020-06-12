@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     hasLogin: false,
     userInfo: {},
+    registerInfo:{},
     TeamMembers: {},//团队成员
   },
   mutations: {
@@ -15,7 +16,10 @@ export default new Vuex.Store({
     },
     sethasLogin(state, val) {
       state.hasLogin = val;
-    }
+    },
+    register(state,provider){
+      state.registerInfo=provider;
+    },
   },
   actions: {
     handleuserInfo(context, val) {
